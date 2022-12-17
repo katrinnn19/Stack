@@ -4,59 +4,53 @@ namespace Stack
 {
     public class Stack<T>
     {
-        private T[] items; // элементы стека
-        private int count;  // количество элементов
-        const int n = 20;   // количество элементов в массиве по умолчанию
+        private T[] stack;
+        private int count;  
+        const int el = 20;  //по умолчанию
         public Stack()
         {
-            items = new T[n];
+            stack = new T[el];
         }
         public Stack(int length)
         {
-            items = new T[length];
+            stack = new T[length];
         }
-        // пуст ли стек
+       
         public bool IsEmpty
         {
             get { return count == 0; }
         }
-        // размер стека
+       
         public int Count
         {
             get { return count; }
         }
-        // добвление элемента
-        public void Push(T item)
+       
+        public void Push(T st)
         {
-            // если стек заполнен, выбрасываем исключение
-            if (count == items.Length)
+            
+            if (count == stack.Length)
                 throw new InvalidOperationException("Переполнение стека");
-            items[count++] = item;
-            Console.WriteLine(item);
+            stack[count++] = st;
+            Console.WriteLine(st);
         }
-        // извлечение элемента
+        
         public T Pop()
         {
-            // если стек пуст, выбрасываем исключение
-            if (IsEmpty)
+             if (IsEmpty)
                 throw new InvalidOperationException("Стек пуст");
-            T item = items[--count];
-            items[count] = default(T); // сбрасываем ссылку
-            return item;
+            T st = stack[--count];
+            stack[count] = default(T); // сбрасываем ссылку
+            return st;
         }
         // возвращаем элемент из верхушки стека
         public T Peek()
         {
-            // если стек пуст, выбрасываем исключение
             if (IsEmpty)
                 throw new InvalidOperationException("Стек пуст");
-            return items[count - 1];
+            return stack[count - 1];
         }
-        public void Show()
-        {
-            Console.WriteLine(Push);
-        }
-       
+      
     }
     class Program
     {
@@ -69,14 +63,11 @@ namespace Stack
             st.Push(500);
             st.Push(3);
 
-                // извлекаем один элемент
-                var head = st.Pop();
-                Console.WriteLine($"\n{head}");
+            var head = st.Pop();
+            Console.WriteLine($"\nИзвлекаем:{head}");
+            head = st.Peek();
+            Console.WriteLine($"\nНовая верхушка: {head}");
           
-                // просто получаем верхушку стека без извлечения
-                head = st.Peek();
-                Console.WriteLine($"\n{head}");
-            st.Show();
            
         }
            
